@@ -2,7 +2,7 @@
 
 A real-time, Pac-Man-inspired maze game built with plain HTML, CSS and JavaScript on the Canvas API. Every level is a freshly generated cave maze with loops, so you can always run circles around the ghosts.
 
-**Play online:** https://YOUR-USERNAME.github.io/dungeon-game/
+**Play online:** https://Rerry21.github.io/dungeon-game/
 
 ## Features
 
