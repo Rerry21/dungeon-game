@@ -2,8 +2,6 @@
 
 A real-time, Pac-Man-inspired maze game built with plain HTML, CSS and JavaScript on the Canvas API. Every level is a freshly generated cave maze with loops, so you can always run circles around the ghosts.
 
-**Play online:** https://Rerry21.github.io/dungeon-game/
-
 ## Features
 
 - Randomly generated maps with loops and no dead-end traps
@@ -14,6 +12,42 @@ A real-time, Pac-Man-inspired maze game built with plain HTML, CSS and JavaScrip
 - Lives, score, levels and rising difficulty
 - Pause and restart
 - No dependencies, no build step
+
+## Getting started
+
+### 1. Clone the repo
+
+```
+git clone https://github.com/YOUR-USERNAME/dungeon-game.git
+cd dungeon-game
+```
+
+### 2. Start a local server
+
+The game uses JavaScript modules, which browsers block when you open `index.html` directly by double-clicking it. It has to be served over http. Pick whichever option you have:
+
+**VS Code + Live Server**
+
+1. Install the Live Server extension.
+2. Right-click `index.html` and choose **Open with Live Server**.
+
+**Node.js**
+
+```
+npx serve .
+```
+
+**Python**
+
+```
+python -m http.server 5500
+```
+
+### 3. Open the game
+
+Go to the address your server prints, for example `http://localhost:5500`.
+
+No `npm install` is needed, because the project has no dependencies.
 
 ## Controls
 
@@ -31,6 +65,56 @@ A real-time, Pac-Man-inspired maze game built with plain HTML, CSS and JavaScrip
 - Touching a normal ghost costs a life. You have 3 lives.
 - Each new level has faster ghosts and shorter power-ups.
 
-## Run locally
+## Project structure
 
-The game uses JavaScript modules, which browsers block on
+```
+dungeon-game/
+├── index.html
+├── style.css
+├── README.md
+├── assets/
+└── src/
+    ├── main.js
+    ├── map.js
+    ├── player.js
+    ├── enemy.js
+    └── render.js
+```
+
+| File | Responsibility |
+| --- | --- |
+| `main.js` | Game state, game loop, input, scoring, lives |
+| `map.js` | Random map generation, loops, pellet placement |
+| `player.js` | Player movement and buffered turning |
+| `enemy.js` | Ghost spawning, pathfinding (BFS) and behaviors |
+| `render.js` | All canvas drawing |
+
+Game state and drawing are kept separate: the logic files only change data, and `render.js` only reads it.
+
+## Tuning difficulty
+
+| Setting | Location | Effect |
+| --- | --- | --- |
+| `PLAYER_MS` | `main.js` | Lower is a faster player |
+| `ghostMs()` | `main.js` | Higher is slower ghosts |
+| `frightMs()` | `main.js` | Length of the power-up |
+| `chance` | `chaseStep` in `enemy.js` | How often ghosts take the shortest path |
+| Phase timers | `update()` in `main.js` | Chase and wander durations |
+
+## Troubleshooting
+
+- **Blank black canvas:** you probably opened `index.html` directly. Use one of the server options above.
+- **Arrow keys scroll the page or do nothing:** click on the page once to give it focus.
+- **Nothing happens after a code change:** hard refresh with Ctrl+Shift+R.
+
+## Ideas for later
+
+- Saved high scores
+- Sound effects
+- Bonus fruit
+- Rooms-and-corridors map generation (BSP)
+- Touch controls for phones
+
+## License
+
+MIT
